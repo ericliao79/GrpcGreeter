@@ -1,3 +1,4 @@
+using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using GrpcGreeter;
 
@@ -17,7 +18,9 @@ public class GreeterService : Greeter.GreeterBase
 
         return Task.FromResult(new HelloReply
         {
-            Message = "Hello " + request.Name
+            Message = "Hello " + request.Name,
+            Uuid = Ulid.NewUlid().ToString(),
+            Timestamp = Timestamp.FromDateTime(DateTime.UtcNow),
         });
     }
 }
